@@ -26,13 +26,13 @@ public class EmployeeController {
     }
 
     @GetMapping("/employees/{id}")
-    public ResponseEntity<Employee> getEmployeeById(@PathVariable Long id){
+    public ResponseEntity<?> getEmployeeById(@PathVariable Long id){
         Optional<Employee> employee = employeeRepository.findById(id);
 
         if (employee.isPresent()){
             return new ResponseEntity<>(employee.get(), HttpStatus.FOUND);
         } else {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>("Not found!", HttpStatus.NOT_FOUND);
         }
     }
 
@@ -43,7 +43,7 @@ public class EmployeeController {
     }
 
     @PutMapping("/employees/{id}")
-    public ResponseEntity<Employee> updateEmployee(@PathVariable Long id, @RequestBody Employee updatedEmployee){
+    public ResponseEntity<?> updateEmployee(@PathVariable Long id, @RequestBody Employee updatedEmployee){
         Optional<Employee> employee = employeeRepository.findById(id);
 
         if (employee.isPresent()){
@@ -53,19 +53,19 @@ public class EmployeeController {
             Employee newEmployee = employeeRepository.save(employee.get());
             return new ResponseEntity<>(newEmployee, HttpStatus.OK);
         } else {
-            return new ResponseEntity<>(updatedEmployee, HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>("Not found!", HttpStatus.NOT_FOUND);
         }
     }
 
     @DeleteMapping("/employees/{id}")
-    public ResponseEntity<Long> deleteEmployee(@PathVariable Long id){
+    public ResponseEntity<?> deleteEmployee(@PathVariable Long id){
         Optional<Employee> employee = employeeRepository.findById(id);
 
         if (employee.isPresent()){
             employeeRepository.delete(employee.get());
-            return new ResponseEntity<>(id, HttpStatus.OK);
+            return new ResponseEntity<>("Deleted!", HttpStatus.OK);
         } else {
-            return new ResponseEntity<>(id, HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>("Not found!", HttpStatus.NOT_FOUND);
         }
     }
 
