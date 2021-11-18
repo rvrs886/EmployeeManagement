@@ -14,7 +14,6 @@ import java.util.Set;
 @Entity
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
 public class Department {
 
@@ -25,4 +24,7 @@ public class Department {
     @NotNull
     private String name;
 
+    public Department(String name) {
+        this.name = name;
+    }
 }

@@ -13,7 +13,6 @@ import javax.persistence.*;
 @Table(name = "employees")
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
 public class Employee {
 
@@ -34,4 +33,15 @@ public class Employee {
     @JoinColumn(name = "departments_id", referencedColumnName = "id")
     private Department department;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "job_positions_id", referencedColumnName = "id")
+    private JobPosition jobPosition;
+
+    public Employee(String firstName, String lastName, String emailId, Department department, JobPosition jobPosition) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.emailId = emailId;
+        this.department = department;
+        this.jobPosition = jobPosition;
+    }
 }
