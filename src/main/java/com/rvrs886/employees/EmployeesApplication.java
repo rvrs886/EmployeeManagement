@@ -18,8 +18,28 @@ public class EmployeesApplication implements CommandLineRunner{
         SpringApplication.run(EmployeesApplication.class, args);
     }
 
+    DepartmentRepository departmentRepository;
+    JobPositionRepository jobPositionRepository;
+
+    EmployeesApplication(DepartmentRepository departmentRepository, JobPositionRepository jobPositionRepository) {
+        this.departmentRepository = departmentRepository;
+        this.jobPositionRepository = jobPositionRepository;
+    }
+
     @Override
     public void run(String... args) throws Exception {
+        Department department1 = new Department("IT");
+        departmentRepository.save(department1);
+        Department department2 = new Department("HR");
+        departmentRepository.save(department2);
+        Department department3 = new Department("MAINTANCE");
+        departmentRepository.save(department3);
 
+        JobPosition jobPosition1 = new JobPosition("Junior Java Developer");
+        jobPositionRepository.save(jobPosition1);
+        JobPosition jobPosition2 = new JobPosition("IT Support");
+        jobPositionRepository.save(jobPosition2);
+        JobPosition jobPosition3 = new JobPosition("HR Specialist");
+        jobPositionRepository.save(jobPosition3);
     }
 }

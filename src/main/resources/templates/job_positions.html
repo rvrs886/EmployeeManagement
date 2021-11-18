@@ -35,7 +35,7 @@
     <br>
     <div class="row">
         <div class="text-center">
-            <a class="btn btn-primary btn-lg" th:href="@{/employees/create}">Create new employee</a>
+            <a class="btn btn-primary btn-lg" th:href="@{/job_positions/create}">Create new job position</a>
         </div>
     </div>
     <br>
@@ -43,22 +43,13 @@
     <table class="table table-striped table-bordered">
         <thead class="table-dark">
         <tr>
-            <th> First name </th>
-            <th> Last name </th>
-            <th> Email </th>
-            <th> Department </th>
-            <th> Job position </th>
-            <th> Actions </th>
+            <th> Position </th>
         </tr>
         </thead>
 
         <tbody>
-        <tr th:each = "employee: ${employees}">
-            <td th:text = "${employee.firstName}"></td>
-            <td th:text = "${employee.lastName}"></td>
-            <td th:text = "${employee.emailId}"></td>
-            <td th:text = "${employee.department.name}"></td>
-            <td th:text = "${employee.jobPosition.positionName}"></td>
+        <tr th:each = "jobPosition: ${jobPositions}">
+            <td th:text = "${jobPosition.positionName}"></td>
         </tr>
         </tbody>
     </table>

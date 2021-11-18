@@ -40,7 +40,7 @@ public class EmployeeController {
         return "create_employee";
     }
 
-    @PostMapping("employees")
+    @PostMapping("/employees")
     public String saveEmployee(@ModelAttribute("employee") Employee employee){
         Department department = departmentRepository.getById(employee.getDepartment().getId());
         JobPosition jobPosition = jobPositionRepository.getById(employee.getJobPosition().getId());

@@ -8,6 +8,8 @@
 <body>
 
     <div class="container">
+        <br>
+        <br>
         <div class="row">
             <div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
                 <h1>Employee creator</h1>
@@ -15,15 +17,15 @@
                     <form th:action="@{/employees}" th:object="${employee}" method="post">
                         <div class="form-group">
                             <label> First name </label>
-                            <input type="text" name="firstName" th:field="*{firstName}" class="form-control" placeholder="Enter first name"/>
+                            <input type="text" name="firstName" th:field="*{firstName}" class="form-control" placeholder="Enter first name" required/>
                         </div>
                         <div class="form-group">
                             <label> Last name </label>
-                            <input type="text" name="lastName" th:field="*{lastName}" class="form-control" placeholder="Enter last name"/>
+                            <input type="text" name="lastName" th:field="*{lastName}" class="form-control" placeholder="Enter last name" required/>
                         </div>
                         <div class="form-group">
                             <label> Email </label>
-                            <input type="text" name="emailId" th:field="*{emailId}" class="form-control" placeholder="Enter email"/>
+                            <input type="text" name="emailId" th:field="*{emailId}" class="form-control" placeholder="Enter email" required/>
                         </div>
                         <div class="form-group">
                             <label> Department </label>
@@ -37,6 +39,7 @@
                                 <option th:each = "jobPosition: ${jobPositions}" th:value="${jobPosition.id}" th:text="${jobPosition.positionName}"></option>
                             </select>
                         </div>
+                        <br>
                         <div class="box-footer">
                             <button type="submit" class="btn btn-primary">
                                 Save
