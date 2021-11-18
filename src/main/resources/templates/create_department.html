@@ -12,12 +12,12 @@
     <br>
     <div class="row">
         <div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
-            <h1>Job position creator</h1>
+            <h1>Department creator</h1>
             <div class="card-body">
-                <form th:action="@{/job_positions}" th:object="${jobPosition}" method="post">
+                <form th:action="@{/departments}" th:object="${department}" method="post">
                     <div class="form-group">
-                        <label> Job position name </label>
-                        <input type="text" name="firstName" th:field="*{positionName}" class="form-control" placeholder="Enter position name" required/>
+                        <label> Department name </label>
+                        <input type="text" name="firstName" th:field="*{name}" class="form-control" placeholder="Enter position name" required/>
                     </div>
                     <br>
                     <div class="box-footer">

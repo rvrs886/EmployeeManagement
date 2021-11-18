@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
@@ -50,6 +51,12 @@ public class EmployeeController {
 
         employeeRepository.save(employee);
 
+        return "redirect:/employees";
+    }
+
+    @GetMapping("/employees/{id}")
+    public String deleteEmployee(@PathVariable Long id){
+        employeeRepository.deleteById(id);
         return "redirect:/employees";
     }
 
