@@ -30,4 +30,8 @@ public class Employee {
     @Column(name = "email_id", nullable = false)
     private String emailId;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "departments_id", referencedColumnName = "id")
+    private Department department;
+
 }

@@ -30,7 +30,8 @@ public class EmployeeController {
         Optional<Employee> employee = employeeRepository.findById(id);
 
         if (employee.isPresent()){
-            return new ResponseEntity<>(employee.get(), HttpStatus.FOUND);
+            Employee foundEmployee = employee.get();
+            return new ResponseEntity<>(foundEmployee, HttpStatus.FOUND);
         } else {
             return new ResponseEntity<>("Not found!", HttpStatus.NOT_FOUND);
         }
@@ -47,10 +48,12 @@ public class EmployeeController {
         Optional<Employee> employee = employeeRepository.findById(id);
 
         if (employee.isPresent()){
-            employee.get().setFirstName(updatedEmployee.getFirstName());
-            employee.get().setLastName(updatedEmployee.getLastName());
-            employee.get().setEmailId(updatedEmployee.getEmailId());
-            Employee newEmployee = employeeRepository.save(employee.get());
+            Employee newEmployee = employee.get();
+            newEmployee.setFirstName(updatedEmployee.getFirstName());
+            newEmployee.setLastName(updatedEmployee.getLastName());
+            newEmployee.setEmailId(updatedEmployee.getEmailId());
+            newEmployee.setDepartment(updatedEmployee.getDepartment());
+            employeeRepository.save(newEmployee);
             return new ResponseEntity<>(newEmployee, HttpStatus.OK);
         } else {
             return new ResponseEntity<>("Not found!", HttpStatus.NOT_FOUND);
