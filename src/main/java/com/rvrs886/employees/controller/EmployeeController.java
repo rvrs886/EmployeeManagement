@@ -6,29 +6,33 @@ import com.rvrs886.employees.model.JobPosition;
 import com.rvrs886.employees.repository.DepartmentRepository;
 import com.rvrs886.employees.repository.EmployeeRepository;
 import com.rvrs886.employees.repository.JobPositionRepository;
+import com.rvrs886.employees.service.DepartmentService;
+import com.rvrs886.employees.service.EmployeeService;
+import com.rvrs886.employees.service.JobPositionService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 public class EmployeeController {
 
-    EmployeeRepository employeeRepository;
-    DepartmentRepository departmentRepository;
-    JobPositionRepository jobPositionRepository;
+    EmployeeService employeeService;
 
-    EmployeeController(EmployeeRepository employeeRepository, DepartmentRepository departmentRepository, JobPositionRepository jobPositionRepository) {
-        this.employeeRepository = employeeRepository;
-        this.departmentRepository = departmentRepository;
-        this.jobPositionRepository = jobPositionRepository;
+    DepartmentService departmentService;
+
+    JobPositionService jobPositionService;
+
+    EmployeeController(EmployeeService employeeService, DepartmentService departmentService, JobPositionService jobPositionService) {
+        this.employeeService = employeeService;
+        this.departmentService = departmentService;
+        this.jobPositionService = jobPositionService;
     }
 
     @GetMapping("/employees")
     public String getAllEmployees(Model model){
-        model.addAttribute("employees", employeeRepository.findAll());
+        model.addAttribute("employees", employeeService.getAllEmployees());
         return "employees";
     }
 
@@ -36,27 +40,22 @@ public class EmployeeController {
     public String createEmployeeForm(Model model){
         Employee employee = new Employee();
         model.addAttribute("employee", employee);
-        model.addAttribute("departments", departmentRepository.findAll());
-        model.addAttribute("jobPositions", jobPositionRepository.findAll());
+        model.addAttribute("departments", departmentService.getAllDepartments());
+        model.addAttribute("jobPositions", jobPositionService.getAllJobPositions());
         return "create_employee";
     }
 
     @PostMapping("/employees")
     public String saveEmployee(@ModelAttribute("employee") Employee employee){
-        Department department = departmentRepository.getById(employee.getDepartment().getId());
-        JobPosition jobPosition = jobPositionRepository.getById(employee.getJobPosition().getId());
-
-        employee.setDepartment(department);
-        employee.setJobPosition(jobPosition);
-
-        employeeRepository.save(employee);
-
+        employeeService.saveEmployee(employee);
         return "redirect:/employees";
     }
 
     @GetMapping("/employees/{id}")
     public String deleteEmployee(@PathVariable Long id){
-        employeeRepository.deleteById(id);
+
+        employeeService.deleteEmployee(id);
+
         return "redirect:/employees";
     }
 

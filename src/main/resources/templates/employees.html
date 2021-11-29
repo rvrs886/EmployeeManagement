@@ -57,8 +57,8 @@
             <td th:text = "${employee.firstName}"></td>
             <td th:text = "${employee.lastName}"></td>
             <td th:text = "${employee.emailId}"></td>
-            <td th:text = "${employee.department.name}"></td>
-            <td th:text = "${employee.jobPosition.positionName}"></td>
+            <td th:text = "${employee.departmentName}"></td>
+            <td th:text = "${employee.jobPositionName}"></td>
             <td>
                 <a type="button" class="btn-close text-center" aria-label="Delete" th:href="@{/employees/{id}(id=${employee.id})}"></a>
             </td>

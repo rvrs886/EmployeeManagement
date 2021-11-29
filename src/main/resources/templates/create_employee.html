@@ -29,13 +29,15 @@
                         </div>
                         <div class="form-group">
                             <label> Department </label>
-                            <select th:field="*{department.id}" class="form-control">
+                            <select th:field="*{department.id}" class="form-control" required>
+                                <option value="" style="display: none"> -- select department -- </option>
                                 <option th:each = "department: ${departments}" th:value="${department.id}" th:text="${department.name}"></option>
                             </select>
                         </div>
                         <div class="form-group">
                             <label> Job position </label>
-                            <select th:field="*{jobPosition.id}" class="form-control">
+                            <select th:field="*{jobPosition.id}" class="form-control" required>
+                                <option value="" style="display: none;"> -- select job position -- </option>
                                 <option th:each = "jobPosition: ${jobPositions}" th:value="${jobPosition.id}" th:text="${jobPosition.positionName}"></option>
                             </select>
                         </div>

@@ -2,6 +2,7 @@ package com.rvrs886.employees.controller;
 
 import com.rvrs886.employees.model.Department;
 import com.rvrs886.employees.repository.DepartmentRepository;
+import com.rvrs886.employees.service.DepartmentService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -14,15 +15,15 @@ import java.util.Optional;
 @Controller
 public class DepartmentController {
 
-    DepartmentRepository departmentRepository;
+    DepartmentService departmentService;
 
-    DepartmentController(DepartmentRepository departmentRepository) {
-        this.departmentRepository = departmentRepository;
+    DepartmentController(DepartmentService departmentService) {
+        this.departmentService = departmentService;
     }
 
     @GetMapping("/departments")
     public String getAllDepartments(Model model){
-        model.addAttribute("departments", departmentRepository.findAll());
+        model.addAttribute("departments", departmentService.getAllDepartments());
         return "departments";
     }
 
@@ -35,9 +36,16 @@ public class DepartmentController {
 
     @PostMapping("/departments")
     public String saveDepartment(@ModelAttribute("department") Department department){
-        departmentRepository.save(department);
+        departmentService.saveDepartment(department);
         return "redirect:/departments";
     }
 
+    @GetMapping("/departments/{id}")
+    public String deleteDepartment(@PathVariable Long id){
+
+        departmentService.deleteDepartment(id);
+
+        return "redirect:/departments";
+    }
 
 }
